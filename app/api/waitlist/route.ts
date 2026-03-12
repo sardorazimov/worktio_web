@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Resend } from 'resend';
 import { NextResponse } from 'next/server';
 
@@ -34,7 +35,7 @@ export async function POST(request: Request) {
     }
 
     return NextResponse.json({ success: true, data });
-  } catch (error) {
+  } catch (_error) {
     return NextResponse.json({ error: 'Sunucu hatası' }, { status: 500 });
   }
 }
