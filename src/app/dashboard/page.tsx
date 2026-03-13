@@ -66,7 +66,7 @@ export default async function DashboardPage() {
   if (!session) redirect("/");
 
   return (
-    <div className="min-h-screen bg-[#09090b] text-zinc-100">
+    <main className="min-h-screen bg-[#09090b] text-zinc-100">
       {/* İnce Üst Bar */}
     
 
@@ -95,6 +95,6 @@ export default async function DashboardPage() {
           ))}
         </div>
       </main>
-    </div>
+    </main>
   );
 }

@@ -1,11 +1,11 @@
 "use client";
-import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { LayoutDashboard, Workflow, MessageSquare, Library, Settings, ChevronLeft, ChevronRight, Database } from 'lucide-react';
+import { LayoutDashboard, Workflow, MessageSquare, ChevronLeft, ChevronRight, Database } from 'lucide-react';
+import { useSidebar } from '../context/sidebar-context';
 
 export default function DashboardSidebar() {
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const { isCollapsed, toggle } = useSidebar();
   const pathname = usePathname();
 
   return (
@@ -30,7 +30,7 @@ export default function DashboardSidebar() {
         ))}
       </nav>
 
-      <button onClick={() => setIsCollapsed(!isCollapsed)} className="p-4 border-t border-zinc-800 text-zinc-500 hover:text-white flex items-center justify-center">
+      <button onClick={toggle} className="p-4 border-t border-zinc-800 text-zinc-500 hover:text-white flex items-center justify-center">
         {isCollapsed ? <ChevronRight size={20} /> : <div className="flex items-center gap-2"><ChevronLeft size={20} /> <span className="text-sm">Daralt</span></div>}
       </button>
     </aside>

@@ -1,4 +1,4 @@
-import { pgTable, text, timestamp, integer, primaryKey } from "drizzle-orm/pg-core";
+import { pgTable, text, timestamp, integer, primaryKey, uuid, jsonb } from "drizzle-orm/pg-core";
 
 // "users" değil, tam olarak "user" olmalı
 export const users = pgTable("user", {
@@ -32,3 +32,17 @@ export const sessions = pgTable("session", {
   userId: text("userId").notNull().references(() => users.id, { onDelete: "cascade" }),
   expires: timestamp("expires", { mode: "date" }).notNull(),
 });
+
+
+export const flows = pgTable("flows", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  userId: text("user_id").notNull(),
+  name: text("name").notNull().default("İsimsiz Flow"),
+  nodes: jsonb("nodes").notNull().default([]),
+  edges: jsonb("edges").notNull().default([]),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+export type Flow = typeof flows.$inferSelect;
+export type NewFlow = typeof flows.$inferInsert
