@@ -1,27 +1,15 @@
-import DashboardHeader from "../../components/dashboard/dashboard-header";
-import DashboardSidebar from "../../components/dashboard/dashboard-sidebar";
+import DashboardSidebar from "@/components/dashboard/dashboard-sidebar";
+import DashboardHeader from "@/components/dashboard/dashboard-header";
+import SidebarMargin from "@/components/dashboard/sidebar-margin";
 
-
-export default function DashboardLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex min-h-screen bg-[#050505] selection:bg-purple-500/30">
-      {/* Sabit Sidebar (Artık "peer" olarak davranıyor) */}
+    <div className="min-h-screen bg-[#09090b] text-zinc-100">
       <DashboardSidebar />
-
-      {/* Ana İçerik Taşıyıcı */}
-      {/* İŞTE O SİHİRLİ SATIR: peer-data-[collapsed=true] ise margin 70px, değilse 260px */}
-      <div className="flex-1 flex flex-col transition-all duration-300 ml-[260px] peer-data-[collapsed=true]:ml-[70px]">
+      <SidebarMargin>
         <DashboardHeader />
-        
-        {/* İçerik */}
-        <main className="flex-1 h-[calc(100vh-64px)] overflow-hidden">
-          {children}
-        </main>
-      </div>
+        {children}
+      </SidebarMargin>
     </div>
   );
 }

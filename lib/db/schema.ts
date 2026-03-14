@@ -1,4 +1,4 @@
-import { pgTable, text, timestamp, integer, primaryKey, uuid, jsonb } from "drizzle-orm/pg-core";
+import { pgTable, text, timestamp, integer, primaryKey, uuid, jsonb, boolean } from "drizzle-orm/pg-core";
 
 // "users" değil, tam olarak "user" olmalı
 export const users = pgTable("user", {
@@ -85,3 +85,63 @@ export const messages = pgTable("messages", {
 
 export type Agent = typeof agents.$inferSelect;
 export type Message = typeof messages.$inferSelect;
+
+
+
+export const subscriptions = pgTable("subscriptions", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  userId: text("user_id").notNull().unique(),
+  plan: text("plan").notNull().default("free"), // free | pro | enterprise
+  status: text("status").notNull().default("active"), // active | cancelled | past_due
+  paddleSubscriptionId: text("paddle_subscription_id"),
+  paddleCustomerId: text("paddle_customer_id"),
+  currentPeriodEnd: timestamp("current_period_end"),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+export type Subscription = typeof subscriptions.$inferSelect;
+
+
+
+// Global değişkenler
+export const variables = pgTable("variables", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  userId: text("user_id").notNull(),
+  key: text("key").notNull(),
+  value: text("value").notNull(),
+  encrypted: boolean("encrypted").notNull().default(false),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+// Credentials (Gmail, GitHub vs)
+export const credentials = pgTable("credentials", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  userId: text("user_id").notNull(),
+  name: text("name").notNull(),
+  type: text("type").notNull(), // gmail | github | slack | webhook
+  data: jsonb("data").notNull().default({}), // encrypted data
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+// Environments
+export const environments = pgTable("environments", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  userId: text("user_id").notNull(),
+  name: text("name").notNull(), // dev | staging | prod
+  isActive: boolean("is_active").notNull().default(false),
+  variables: jsonb("variables").notNull().default({}),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+// AI Usage
+export const aiUsage = pgTable("ai_usage", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  userId: text("user_id").notNull(),
+  model: text("model").notNull(),
+  inputTokens: integer("input_tokens").notNull().default(0),
+  outputTokens: integer("output_tokens").notNull().default(0),
+  cost: integer("cost").notNull().default(0), // cent cinsinden
+  source: text("source").notNull().default("agent"), // agent | flow
+  createdAt: timestamp("created_at").defaultNow(),
+});

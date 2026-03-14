@@ -8,5 +8,11 @@ export default NextAuth(authConfig).auth;
 
 export const config = {
   // api, _next/static vb. hariç her tetiklenmede çalışır
-  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
+  matcher: [
+     
+     "/dashboard/:path*",
+    //  "/agent/:path*", --- IGNORE ---
+  ],
+  
 };
+
