@@ -20,7 +20,10 @@ const page = () => {
     <>
       {/* <Header /> */}
       <Navbar />
-       <Laserlanding />
+      <div className='pt-16'> 
+          <Laserlanding />
+      </div>
+     
         {/* <TechStackSections /> */}
         <Features />
         <FeatureCardsSection />

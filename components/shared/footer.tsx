@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
 import { Workflow, Github, Twitter, Youtube, MessageCircle } from "lucide-react";
 
@@ -55,19 +56,19 @@ const GUIDES = [
 
 export default function Footer() {
   return (
-    <footer className="bg-[#030303] border-t border-white/[0.06]">
+    <footer className=" bg-gradient-to-b from-[#030303] via-orange-950  to-[#1a1a1a] border-t border-white/[0.06]">
       {/* Ana footer */}
-       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[200px] bg-primary/10 blur-[100px] rounded-full" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[200px] bg-primary/10 blur-[100px] rounded-full" />
       <div className="max-w-7xl mx-auto px-6 py-16">
         <div className="grid grid-cols-2 md:grid-cols-5 gap-10 mb-12">
           {/* Logo + sosyal */}
           <div className="col-span-2 md:col-span-1">
             <Link href="/" className="flex items-center gap-2 mb-4">
               <div
-                className="w-8 h-8 bg-gradient-to-br from-purple-500 to-violet-600 rounded-lg flex items-center justify-center"
-                style={{ boxShadow: "0 0 15px rgba(124,58,237,0.4)" }}
+                className="w-16 h-16  flex items-center justify-center"
+               
               >
-                <Workflow size={16} className="text-white" />
+                <img src="./logo.png" alt="Miransaas" className="text-white" />
               </div>
               <span className="font-black text-lg tracking-tighter uppercase italic text-white">
                 Worktio
@@ -78,13 +79,13 @@ export default function Footer() {
             </p>
             <div className="flex items-center gap-2">
               {[
-                { icon: <Twitter size={14} />, href: "https://twitter.com" },
-                { icon: <Github size={14} />, href: "https://github.com" },
+                { icon: <Twitter size={14} />, href: "https://twitter.com/miransaas" },
+                { icon: <Github size={14} />, href: "https://github.com/miransas" },
                 { icon: <MessageCircle size={14} />, href: "/community" },
-                { icon: <Youtube size={14} />, href: "https://youtube.com" },
+                { icon: <Youtube size={14} />, href: "https://youtube.com/miransas" },
               ].map((s, i) => (
                 <a key={i} href={s.href}
-                  className="w-7 h-7 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-zinc-500 hover:text-white hover:bg-white/10 transition-all"
+                  className="w-7 h-7 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-zinc-200 hover:text-white hover:bg-white/10 transition-all"
                 >
                   {s.icon}
                 </a>
@@ -130,7 +131,7 @@ export default function Footer() {
                 {INTEGRATIONS.map(item => (
                   <li key={item}>
                     <Link href={`/docs/integrations/${item.toLowerCase()}`}
-                      className="text-xs text-zinc-700 hover:text-zinc-400 transition-colors"
+                      className="text-xs text-zinc-200 hover:text-zinc-400 transition-colors"
                     >
                       {item}
                     </Link>
@@ -141,14 +142,14 @@ export default function Footer() {
 
             {/* Trending kombinasyonlar */}
             <div>
-              <h3 className="text-xs font-bold text-zinc-500 uppercase tracking-wider mb-4">
+              <h3 className="text-xs font-bold text-zinc-200 uppercase tracking-wider mb-4">
                 Popüler Kombinasyonlar
               </h3>
               <ul className="space-y-2">
                 {TRENDING.map(item => (
                   <li key={item}>
                     <Link href="/blog"
-                      className="text-xs text-zinc-700 hover:text-zinc-400 transition-colors"
+                      className="text-xs text-zinc-200 hover:text-zinc-400 transition-colors"
                     >
                       {item}
                     </Link>
@@ -159,14 +160,14 @@ export default function Footer() {
 
             {/* Kategoriler */}
             <div>
-              <h3 className="text-xs font-bold text-zinc-500 uppercase tracking-wider mb-4">
+              <h3 className="text-xs font-bold text-zinc-200 uppercase tracking-wider mb-4">
                 Entegrasyon Kategorileri
               </h3>
               <ul className="space-y-2">
                 {CATEGORIES.map(item => (
                   <li key={item}>
                     <Link href="/docs"
-                      className="text-xs text-zinc-700 hover:text-zinc-400 transition-colors"
+                      className="text-xs text-zinc-200 hover:text-zinc-400 transition-colors"
                     >
                       {item}
                     </Link>
@@ -177,14 +178,14 @@ export default function Footer() {
 
             {/* Rehberler */}
             <div>
-              <h3 className="text-xs font-bold text-zinc-500 uppercase tracking-wider mb-4">
+              <h3 className="text-xs font-bold text-zinc-200 uppercase tracking-wider mb-4">
                 Popüler Rehberler
               </h3>
               <ul className="space-y-2">
                 {GUIDES.map(item => (
                   <li key={item}>
                     <Link href="/blog"
-                      className="text-xs text-zinc-700 hover:text-zinc-400 transition-colors"
+                      className="text-xs text-zinc-200 hover:text-zinc-400 transition-colors"
                     >
                       {item}
                     </Link>
@@ -197,11 +198,14 @@ export default function Footer() {
 
         {/* En alt bar */}
         <div className="border-t border-white/[0.04] mt-10 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-zinc-700">
-            © 2026 Worktio. Tüm hakları saklıdır.
-          </p>
+          <Link href="https://miransas.com" className="flex items-center gap-1">
+            <img src="./miransas.png" alt="" className="w-12" /> <p className="text-xl text-zinc-100">
+              © 2026 Miransaas
+            </p>
+          </Link>
+
           <div className="flex items-center gap-1 text-xs text-zinc-700">
-            Türkiye&rsquo;de <span className="text-red-500 mx-1">❤️</span> ile yapıldı
+            Sardor&rsquo; <span className="text-red-500 mx-1">❤️</span> Azimov
           </div>
         </div>
       </div>

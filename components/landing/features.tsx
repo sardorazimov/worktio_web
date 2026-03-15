@@ -13,7 +13,7 @@ const FEATURES = [
 
 export default function Features() {
   return (
-    <section id="features" className="py-32 px-6 bg-[#030303]">
+    <section id="features" className="py-32 px-6  bg-gradient-to-b from-[#030303] via-orange-950  to-[#1a1a1a] relative overflow-hidden">
       <div className="max-full mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

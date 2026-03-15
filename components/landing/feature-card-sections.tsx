@@ -1,6 +1,8 @@
-
+"use client";
 import { Workflow, Brain, Zap } from "lucide-react";
 import FeatureCard from "./feature-card";
+import GradualBlur from './GradualBlur';
+import ScrollStack from "./ScrollStack";
 
 const CARDS = [
   {
@@ -110,12 +112,14 @@ const CARDS = [
 
 export default function FeatureCardsSection() {
   return (
-    <section className="py-24 px-6 bg-[#030303]">
-      <div className="max-w-5xl mx-auto space-y-6">
+   <>
+     <section className="py-24 px-6 bg-[#030303]" >
+      <div className="max-full mx-auto space-y-6">
         {CARDS.map((card, i) => (
           <FeatureCard key={i} {...card} />
         ))}
       </div>
     </section>
+   </>
   );
 }

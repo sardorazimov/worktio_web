@@ -2,6 +2,7 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { Star, Quote } from "lucide-react";
+import FloatingLines from "./FloatingLines";
 
 const TESTIMONIALS = [
   {
@@ -59,7 +60,9 @@ export default function Testimonials() {
   const inView = useInView(ref, { once: true });
 
   return (
-    <section className="py-32 px-6 bg-[#030303] relative overflow-hidden">
+    <section className="py-32 px-6  bg-gradient-to-b from-[#030303] via-orange-800  to-[#1a1a1a]relative overflow-hidden">
+      
+      
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-600/5 rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-600/5 rounded-full blur-[100px] pointer-events-none" />
 
@@ -72,7 +75,7 @@ export default function Testimonials() {
         >
           <h2 className="text-4xl md:text-5xl font-black tracking-tighter text-white mb-4">
             Kullanıcılar{" "}
-            <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-purple-400 to-white bg-clip-text text-transparent">
               ne diyor?
             </span>
           </h2>
@@ -92,7 +95,7 @@ export default function Testimonials() {
               <Quote size={20} className="text-white/5 absolute top-4 right-4" />
 
               <div className="flex gap-1 mb-4">
-                {[1,2,3,4,5].map(s => (
+                {[1, 2, 3, 4, 5].map(s => (
                   <Star key={s} size={12} className="text-amber-400 fill-amber-400" />
                 ))}
               </div>
@@ -105,7 +108,7 @@ export default function Testimonials() {
                 </div>
                 <div>
                   <div className="text-sm font-semibold text-white">{t.name}</div>
-                  <div className="text-xs text-zinc-600">{t.role} · {t.company}</div>
+                  <div className="text-xs text-zinc-200">{t.role} · {t.company}</div>
                 </div>
               </div>
             </motion.div>

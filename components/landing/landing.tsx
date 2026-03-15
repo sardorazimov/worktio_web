@@ -7,6 +7,7 @@ import { LaserFlow } from './LaserFlow';
 import { Zap, ArrowRight, Check } from 'lucide-react';
 import Link from 'next/link';
 import FlowAnimation from './flow-animation';
+import { NoiseBackground } from '../ui/noise-background';
 
 export function Laserlanding() {
     const revealImgRef = useRef<HTMLImageElement>(null);
@@ -38,23 +39,24 @@ export function Laserlanding() {
             }}
         >
             {/* LaserFlow arka plan */}
-            <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
+            <div style={{ position: 'absolute', inset: 0, zIndex: 0, left: '7%', }}>
                 <LaserFlow
                     horizontalBeamOffset={0.1}
                     verticalBeamOffset={0.0}
-                    color="#CF9EFF"
-                    horizontalSizing={0.5}
-                    verticalSizing={2}
-                    wispDensity={1}
-                    wispSpeed={15}
-                    wispIntensity={5}
-                    flowSpeed={0.35}
-                    flowStrength={0.25}
+                    color="#ff7300"
+                    horizontalSizing={0.95}
+                    verticalSizing={5}
+                    wispDensity={5}
+                    wispSpeed={35.5}
+                    wispIntensity={15.1}
+                    flowSpeed={0.33}
+                    flowStrength={0.39}
                     fogIntensity={0.45}
-                    fogScale={0.3}
+                    fogScale={1}
                     fogFallSpeed={0.6}
-                    decay={1.1}
-                    falloffStart={1.2}
+                    decay={1.06}
+
+                    falloffStart={2.73}
                 />
             </div>
 
@@ -106,17 +108,18 @@ export function Laserlanding() {
                         lineHeight: 0.9,
                         marginBottom: '24px',
                     }}
-                >
-                    Otomasyonu
+                    className='relative z-30 max-w-[616px] bg-gradient-to-br from-white from-30% via-[#d5d8f6] via-80% to-[#fdf7fe] bg-clip-text font-title text-84 font-semibold leading-[0.9] tracking-tight text-transparent lg:max-w-[528px] lg:text-72 md:max-w-[441px] md:text-56 sm:max-w-64 sm:text-32"'
+                > <br />
+                    OtomasyonuYeniden
+                    <br />
+                    Düşün
                     <br />
                     <span style={{
                         background: 'linear-gradient(90deg, #a78bfa, #818cf8, #60a5fa)',
                         WebkitBackgroundClip: 'text',
                         WebkitTextFillColor: 'transparent',
                     }}>
-                        Yeniden
-                        <br />
-                        Düşün
+
                     </span>
                 </motion.h1>
 
@@ -138,17 +141,25 @@ export function Laserlanding() {
                 >
                     <Link href="/dashboard" style={{
                         display: 'flex', alignItems: 'center', gap: '8px',
-                        background: 'white', color: 'black',
-                        padding: '12px 24px', borderRadius: '14px',
-                        fontSize: '14px', fontWeight: 700,
-                        textDecoration: 'none',
+                        background: 'rgba(255,255,255,0.05)',
                         boxShadow: '0 0 40px rgba(139,92,246,0.4)',
                     }}>
-                        <Zap size={16} color="#7c3aed" />
-                        Ücretsiz Başla
-                        <ArrowRight size={14} />
+                        <NoiseBackground
+                            containerClassName="w-fit p-2 rounded-full mx-auto"
+                            gradientColors={[
+                                "rgb(255, 100, 150)",
+                                "rgb(255, 150, 255)",
+                                "rgb(255, 200, 100)",
+                            ]}
+                        >
+                            <button className="h-full w-full cursor-pointer rounded-full bg-linear-to-r from-neutral-100 via-neutral-100 to-white px-4 py-2 text-black shadow-[0px_2px_0px_0px_var(--color-neutral-50)_inset,0px_0.5px_1px_0px_var(--color-neutral-400)] transition-all duration-100 active:scale-98 dark:from-black dark:via-black dark:to-neutral-900 dark:text-white dark:shadow-[0px_1px_0px_0px_var(--color-neutral-950)_inset,0px_1px_0px_0px_var(--color-neutral-800)]">
+                                Start publishing &rarr;
+                            </button>
+                        </NoiseBackground>
+
+                        
                     </Link>
-                    <Link href="/dashboard" style={{
+                    <Link href="/demo" style={{
                         display: 'flex', alignItems: 'center', gap: '8px',
                         background: 'rgba(255,255,255,0.05)',
                         border: '1px solid rgba(255,255,255,0.1)',
@@ -190,10 +201,10 @@ export function Laserlanding() {
                 zIndex: 20,
                 overflow: 'hidden',
                 padding: '1px', // border için
-                background: 'linear-gradient(135deg, rgba(207,158,255,0.6), rgba(99,102,241,0.2), rgba(207,158,255,0.6))',
+                background: 'linear-gradient(135deg, rgba(255,115,0,0.6), rgba(255,80,0,0.2), rgba(255,115,0,0.6))',
                 backgroundSize: '200% 200%',
                 animation: 'borderBeam 3s linear infinite',
-                boxShadow: '0 0 40px rgba(207,158,255,0.2), 0 0 80px rgba(207,158,255,0.1)',
+                boxShadow: '0 0 40px rgba(255,115,0,0.2), 0 0 80px rgba(255,115,0,0.1)',
             }}>
                 {/* İç container */}
                 <div style={{
@@ -202,8 +213,9 @@ export function Laserlanding() {
                     borderRadius: '19px',
                     overflow: 'hidden',
                     background: '#060010',
+                    top: 20,
                 }}>
-                      <FlowAnimation />
+                    <FlowAnimation />
                     {/* <img
                         src="/hero.png"
                         alt="Dashboard"
