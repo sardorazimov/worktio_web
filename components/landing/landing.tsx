@@ -8,6 +8,7 @@ import { Zap, ArrowRight, Check } from 'lucide-react';
 import Link from 'next/link';
 import FlowAnimation from './flow-animation';
 import { NoiseBackground } from '../ui/noise-background';
+import GlowButton from './GlowButton';
 
 export function Laserlanding() {
     const revealImgRef = useRef<HTMLImageElement>(null);
@@ -102,35 +103,39 @@ export function Laserlanding() {
                     transition={{ duration: 0.7, delay: 0.1 }}
                     style={{
                         fontSize: '64px',
-                        fontWeight: 900,
-                        color: 'white',
+                        fontWeight: 700,
                         letterSpacing: '-3px',
                         lineHeight: 0.9,
                         marginBottom: '24px',
-                    }}
-                    className='relative z-30 max-w-[616px] bg-gradient-to-br from-white from-30% via-[#d5d8f6] via-80% to-[#fdf7fe] bg-clip-text font-title text-84 font-semibold leading-[0.9] tracking-tight text-transparent lg:max-w-[528px] lg:text-72 md:max-w-[441px] md:text-56 sm:max-w-64 sm:text-32"'
-                > <br />
-                    OtomasyonuYeniden
-                    <br />
-                    Düşün
-                    <br />
-                    <span style={{
-                        background: 'linear-gradient(90deg, #a78bfa, #818cf8, #60a5fa)',
+                        background: 'linear-gradient(135deg, #ffffff 30%, #d5d8f6 80%, #fdf7fe 100%)',
                         WebkitBackgroundClip: 'text',
                         WebkitTextFillColor: 'transparent',
-                    }}>
-
-                    </span>
+                        backgroundClip: 'text',
+                    }}
+                >
+                    Otomasyonu
+                    <br />
+                    Yeniden Düşün
                 </motion.h1>
 
                 <motion.p
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.2 }}
-                    style={{ color: '#71717a', fontSize: '15px', lineHeight: 1.6, marginBottom: '32px', maxWidth: '400px' }}
+                    style={{
+                        fontSize: '18px',
+                        lineHeight: 1.7,
+                        marginBottom: '32px',
+                        maxWidth: '420px',
+                        background: 'linear-gradient(135deg, #a1a1aa 0%, #71717a 100%)',
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                        backgroundClip: 'text',
+                        fontWeight: 400,
+                    }}
                 >
                     Flow Builder + AI Agent + Gerçek zamanlı execution.
-                    daha fazla ai entegrasyonu yolda!
+                    Daha fazla AI entegrasyonu yolda!
                 </motion.p>
 
                 <motion.div
@@ -139,37 +144,13 @@ export function Laserlanding() {
                     transition={{ duration: 0.6, delay: 0.3 }}
                     style={{ display: 'flex', gap: '12px', marginBottom: '24px', flexWrap: 'wrap' }}
                 >
-                    <Link href="/dashboard" style={{
-                        display: 'flex', alignItems: 'center', gap: '8px',
-                        background: 'rgba(255,255,255,0.05)',
-                        boxShadow: '0 0 40px rgba(139,92,246,0.4)',
-                    }}>
-                        <NoiseBackground
-                            containerClassName="w-fit p-2 rounded-full mx-auto"
-                            gradientColors={[
-                                "rgb(255, 100, 150)",
-                                "rgb(255, 150, 255)",
-                                "rgb(255, 200, 100)",
-                            ]}
-                        >
-                            <button className="h-full w-full cursor-pointer rounded-full bg-linear-to-r from-neutral-100 via-neutral-100 to-white px-4 py-2 text-black shadow-[0px_2px_0px_0px_var(--color-neutral-50)_inset,0px_0.5px_1px_0px_var(--color-neutral-400)] transition-all duration-100 active:scale-98 dark:from-black dark:via-black dark:to-neutral-900 dark:text-white dark:shadow-[0px_1px_0px_0px_var(--color-neutral-950)_inset,0px_1px_0px_0px_var(--color-neutral-800)]">
-                                Start publishing &rarr;
-                            </button>
-                        </NoiseBackground>
-
-                        
-                    </Link>
-                    <Link href="/demo" style={{
-                        display: 'flex', alignItems: 'center', gap: '8px',
-                        background: 'rgba(255,255,255,0.05)',
-                        border: '1px solid rgba(255,255,255,0.1)',
-                        color: 'white',
-                        padding: '12px 24px', borderRadius: '14px',
-                        fontSize: '14px', fontWeight: 500,
-                        textDecoration: 'none',
-                    }}>
-                        Demo İzle
-                    </Link>
+                    <GlowButton href="/dashboard" label="Dashboard" />
+                    {/* <Link
+                        href="/docs"
+                        className="flex items-center gap-2 px-6 py-3.5 rounded-full bg-white border border-orange-500 text-orange-500 text-[13px] font-bold tracking-widest uppercase transition-all duration-300 hover:bg-orange-500 hover:text-white shadow-sm hover:shadow-[0_0_20px_rgba(249,115,22,0.4)]"
+                    >
+                        DOCS →
+                    </Link> */}
                 </motion.div>
 
                 <motion.div
@@ -179,8 +160,27 @@ export function Laserlanding() {
                     style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}
                 >
                     {["Kredi kartı gerekmez", "1000 execution ücretsiz", "2 dakikada kurulum"].map(t => (
-                        <div key={t} style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12px', color: '#52525b' }}>
-                            <Check size={12} color="#7c3aed" />
+                        <div key={t} style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '8px',
+                            fontSize: '12px',
+                            color: '#71717a',
+                            letterSpacing: '0.05em',
+                        }}>
+                            <div style={{
+                                width: '16px',
+                                height: '16px',
+                                borderRadius: '50%',
+                                background: 'rgba(255,115,0,0.1)',
+                                border: '1px solid rgba(255,115,0,0.3)',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                flexShrink: 0,
+                            }}>
+                                <Check size={9} color="#ff7300" />
+                            </div>
                             {t}
                         </div>
                     ))}

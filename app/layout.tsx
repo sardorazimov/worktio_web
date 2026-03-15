@@ -1,25 +1,20 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import type { Metadata } from "next";
-// Geist yerine modern SaaS fontlarını çekiyoruz
-import { Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google"; // Plus Jakarta yerine endüstri standardı Inter
 import "./globals.css";
-
 
 import ComingSoonModal from "../components/shared/ComingSoonModal";
 import { ThemeProvider } from "../components/provider/theme-provider";
 import { getLocale, getMessages } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
 
-
-// Ana metinler, başlıklar ve butonlar için harika bir font
-const plusJakarta = Plus_Jakarta_Sans({
+// SaaS dünyasının en temiz fontu
+const inter = Inter({
   variable: "--font-sans",
   subsets: ["latin"],
-  // Fontun kalınlıklarını projeye göre optimize ediyoruz
-  weight: ["400", "500", "600", "700", "800"],
 });
 
-// Kod blokları, loglar ve teknik detaylar için
+// Kod blokları ve teknik detaylar için
 const jetBrainsMono = JetBrains_Mono({
   variable: "--font-mono",
   subsets: ["latin"],
@@ -28,26 +23,26 @@ const jetBrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://worktio.com"),
   title: {
-    default: "Worktio — n8n'den Güçlü Otomasyon Platformu",
+    default: "Worktio — Advanced AI Automation Platform",
     template: "%s | Worktio",
   },
-  description: "Flow Builder + AI Agent ile tüm iş süreçlerinizi otomatize edin. GPT-4o destekli ajanlar, görsel flow builder ve gerçek zamanlı execution.",
-  keywords: ["otomasyon", "flow builder", "AI agent", "n8n alternatifi", "GPT-4o", "gmail otomasyon", "webhook", "worktio"],
+  description: "Automate all your business workflows with our Visual Flow Builder and AI Agents. Featuring GPT-4o powered agents and real-time execution.",
+  keywords: ["automation", "flow builder", "AI agent", "n8n alternative", "GPT-4o", "gmail automation", "webhook", "worktio", "saas"],
   authors: [{ name: "Worktio" }],
   creator: "Worktio",
   openGraph: {
     type: "website",
-    locale: "tr_TR",
+    locale: "en_US",
     url: "https://worktio.com",
     siteName: "Worktio",
-    title: "Worktio — n8n'den Güçlü Otomasyon Platformu",
-    description: "Flow Builder + AI Agent ile tüm iş süreçlerinizi otomatize edin.",
+    title: "Worktio — Advanced AI Automation Platform",
+    description: "Automate all your business workflows with our Visual Flow Builder and AI Agents.",
     images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Worktio" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Worktio — n8n'den Güçlü Otomasyon Platformu",
-    description: "Flow Builder + AI Agent ile tüm iş süreçlerinizi otomatize edin.",
+    title: "Worktio — Advanced AI Automation Platform",
+    description: "Automate all your business workflows with our Visual Flow Builder and AI Agents.",
     images: ["/og-image.png"],
     creator: "@worktio",
   },
@@ -63,39 +58,44 @@ export const metadata: Metadata = {
   },
 };
 
-
 export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   const isSiteLocked = true;
+  
+  // Dil ayarlarını sunucudan çekiyoruz
   const locale = await getLocale();
   const messages = await getMessages();
+
+  // Arapça için sağdan sola (RTL) zırhı
+  const direction = locale === 'ar' ? 'rtl' : 'ltr';
+
   return (
-    <html lang="Uzb,Tr,Us" suppressHydrationWarning>
+    // ZIRH 1: lang özelliği dinamik oldu, virgüllü katliam bitti
+    <html lang={locale} dir={direction} suppressHydrationWarning>
       <head />
       <body
         className={`
-          ${plusJakarta.variable} ${jetBrainsMono.variable} 
+          ${inter.variable} ${jetBrainsMono.variable} 
           font-sans antialiased 
-          selection:bg-orange-500 selection:text-white
+          selection:bg-purple-500 selection:text-white
         `}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
-        >
-
-          {/* {isSiteLocked && <ComingSoonModal />} */}
-          <>
+        {/* ZIRH 2: i18n çevirileri için sarmalayıcı (Bunu unutmuştun) */}
+        <NextIntlClientProvider messages={messages} locale={locale}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {/* {isSiteLocked && <ComingSoonModal />} */}
             {children}
-          </>
-          {/* <Footer /> */}
-
-        </ThemeProvider>
+            {/* <Footer /> */}
+          </ThemeProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   );
