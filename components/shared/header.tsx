@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { useState, useEffect } from "react";
@@ -84,7 +85,7 @@ export default function Header() {
           {/* Mobil Hamburger */}
           <button
             className="md:hidden text-neutral-100 p-2 rounded-lg hover:bg-white/5 transition"
-            onClick={() => setIsMobileMenuOpen(true)}
+            // onClick={() => setIsMobileMenuOpen(true)}
           >
             <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />

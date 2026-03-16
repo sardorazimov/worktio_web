@@ -1,12 +1,15 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 /* eslint-disable @next/next/no-img-element */
 "use client"
 
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Menu } from "lucide-react"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
-import LanguageSwitcher from "../shared/language-switcher"
+
+import { useTheme } from "next-themes"
+import { StarButton } from "../ui/star-button"
 
 const LINKS = [
   { label: "Özellikler", href: "#features" },
@@ -20,6 +23,11 @@ const LINKS = [
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const router = useRouter()
+  const { theme } = useTheme()
+  const [lightColor, setLightColor] = useState("#ff7300")
+  useEffect(() => {
+    setLightColor(theme === "dark" ? "#ff7300" : "#ff7300")
+  }, [theme])
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/50">
@@ -28,7 +36,7 @@ export function Navbar() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
             <div className="flex items-center">
-               <img src="/logo.png" alt="Worktio Logo" className="w-8 h-8" />
+              <img src="/logo.png" alt="Worktio Logo" className="w-8 h-8" />
               <span className="ml-2 text-xl font-bold text-foreground">Worktio</span>
             </div>
           </Link>
@@ -48,14 +56,14 @@ export function Navbar() {
 
           {/* CTA Buttons */}
           <div className="hidden lg:flex items-center gap-4">
-            <Button 
-              onClick={() => router.push("/login")}
-            variant="ghost" className="text-foreground">
-              Sign in
-            </Button>
-            <Button className="bg-primary text-primary-foreground hover:bg-primary/90">
+            <StarButton lightColor={lightColor} className="rounded-3xl px-10 py-4 border border-primary text-primary hover:bg-primary/10"> 
+              <Link href="/login">Login</Link>
+            </StarButton>
+
+
+            {/* <Button className="bg-primary text-primary-foreground hover:bg-primary/90">
               Get started free
-            </Button>
+            </Button> */}
             {/* <LanguageSwitcher /> */}
           </div>
 
@@ -82,10 +90,10 @@ export function Navbar() {
                 </Link>
               ))}
               <div className="flex flex-col gap-2 pt-4">
-                <Button 
+                <Button
                   onClick={() => router.push("/login")}
-                 variant="ghost" className="w-full text-foreground">
-                  
+                  variant="ghost" className="w-full text-foreground">
+
                 </Button>
                 <Button className="w-full bg-primary text-primary-foreground">
                   Get started free

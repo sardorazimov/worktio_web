@@ -80,7 +80,7 @@ export default async function RootLayout({
         className={`
           ${inter.variable} ${jetBrainsMono.variable} 
           font-sans antialiased 
-          selection:bg-purple-500 selection:text-white
+          selection:bg-orange-700 selection:text-white
         `}
       >
         {/* ZIRH 2: i18n çevirileri için sarmalayıcı (Bunu unutmuştun) */}
