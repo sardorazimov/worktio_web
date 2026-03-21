@@ -10,6 +10,7 @@ import CtaSection from '../components/landing/cta-sections'
 import Footer from '../components/shared/footer'
 import FeatureCardsSection from '../components/landing/feature-card-sections'
 import { Navbar } from '../components/landing/Navbar'
+import ConnectedCards from '../components/test/test'
 
 
 
@@ -30,6 +31,7 @@ const page = () => {
         <Testimonials/>
         <Faq />
         <CtaSection />
+        {/* <ConnectedCards/> */}
        <Footer />
     </>
   )
