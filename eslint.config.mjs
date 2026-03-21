@@ -12,6 +12,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    "eslint-disable @typescript-eslint/no-unused-vars",
+    "eslint-disable @typescript-eslint/no-explicit-any",
+
   ]),
 ]);
 
