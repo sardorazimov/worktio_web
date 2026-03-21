@@ -6,34 +6,31 @@ import { eq } from "drizzle-orm";
 
 export async function POST(req: Request) {
   const body = await req.json();
+  console.log("Telegram body:", JSON.stringify(body));
 
-  // Telegram'dan gelen mesaj
   const message = body.message || body.channel_post;
   if (!message) return NextResponse.json({ ok: true });
 
   const text = message.text || message.caption || "";
-  const photo = message.photo?.[message.photo.length - 1];
-  const video = message.video;
-  const fileId = photo?.file_id || video?.file_id || null;
-  const contentType = video ? "video" : photo ? "image" : "text";
 
-  // İçeriği işle
-  const payload = {
-    text,
-    fileId,
-    contentType,
-    messageId: message.message_id,
-    chatId: message.chat.id,
-  };
+  // Direkt kanala gönder — AI yok, test için
+  const token = process.env.TELEGRAM_BOT_TOKEN;
+  const channelId = process.env.TELEGRAM_CHANNEL_ID;
 
-  // Flow'u tetikle
-  try {
-    const result = await processContent(payload);
-    return NextResponse.json({ ok: true, result });
-  } catch (err) {
-    console.error("Telegram webhook error:", err);
-    return NextResponse.json({ ok: false }, { status: 500 });
-  }
+  const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      chat_id: channelId,
+      text: `📢 Yeni içerik:\n\n${text}`,
+      parse_mode: "HTML",
+    }),
+  });
+
+  const result = await res.json();
+  console.log("Telegram result:", result);
+
+  return NextResponse.json({ ok: true });
 }
 
 async function processContent(payload: any) {
